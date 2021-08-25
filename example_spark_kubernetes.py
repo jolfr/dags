@@ -59,7 +59,7 @@ t1 = SparkKubernetesOperator(
     task_id='spark_pi_submit',
     namespace="hawkeye-workloads",
     application_file="example_spark_kubernetes_spark_pi.yaml",
-    kubernetes_conn_id="in_cluster",
+    kubernetes_conn_id="local_kube",
     do_xcom_push=True,
     dag=dag,
 )
@@ -68,7 +68,7 @@ t2 = SparkKubernetesSensor(
     task_id='spark_pi_monitor',
     namespace="hawkeye-workloads",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
-    kubernetes_conn_id="in_cluster",
+    kubernetes_conn_id="local_kube",
     dag=dag,
 )
 t1 >> t2
