@@ -121,7 +121,6 @@ with DAG(
         hostnetwork=False,
         tolerations=tolerations,
         init_containers=[init_container],
-        priority_class_name="medium",
     )
 
     # [START howto_operator_k8s_private_image]
