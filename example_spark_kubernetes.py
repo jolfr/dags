@@ -51,7 +51,7 @@ dag = DAG(
         'max_active_runs': 1,
     },
     description='submit spark-pi as sparkApplication on kubernetes',
-    schedule_interval=timedelta(days=1),
+    schedule_interval=None,
     start_date=days_ago(1),
 )
 
