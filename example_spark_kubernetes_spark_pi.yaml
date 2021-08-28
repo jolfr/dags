@@ -19,7 +19,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: "spark-pi-{{ ts_nodash }}"
+  name: "spark-pi-{{ macros.random }}"
   namespace: hawkeye-workloads
 spec:
   type: Scala
