@@ -104,7 +104,7 @@ with DAG(
     tags=['example'],
 ) as dag:
     k = KubernetesPodOperator(
-        namespace='default',
+        namespace='hawkeye-workloads',
         image="ubuntu:16.04",
         cmds=["bash", "-cx"],
         arguments=["echo", "10"],
@@ -125,7 +125,7 @@ with DAG(
 
     # [START howto_operator_k8s_private_image]
     quay_k8s = KubernetesPodOperator(
-        namespace='default',
+        namespace='hawkeye-workloads',
         image='quay.io/apache/bash',
         image_pull_secrets=[k8s.V1LocalObjectReference('testquay')],
         cmds=["bash", "-cx"],
@@ -141,7 +141,7 @@ with DAG(
 
     # [START howto_operator_k8s_write_xcom]
     write_xcom = KubernetesPodOperator(
-        namespace='default',
+        namespace='hawkeye-workloads',
         image='alpine',
         cmds=["sh", "-c", "mkdir -p /airflow/xcom/;echo '[1,2,3,4]' > /airflow/xcom/return.json"],
         name="write-xcom",
