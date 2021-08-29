@@ -48,11 +48,12 @@ dag = DAG(
         'email': ['airflow@example.com'],
         'email_on_failure': False,
         'email_on_retry': False,
-        'max_active_runs': 1,
+        'concurrency': "2",
+        'max_active_runs': "1",
     },
     description='submit spark-pi as sparkApplication on kubernetes',
     schedule_interval='@hourly',
-    start_date=days_ago(1),
+    start_date="2021-8-28",
 )
 
 t1 = SparkKubernetesOperator(
