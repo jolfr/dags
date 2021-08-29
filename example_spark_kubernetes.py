@@ -53,7 +53,7 @@ dag = DAG(
     },
     description='submit spark-pi as sparkApplication on kubernetes',
     schedule_interval='@hourly',
-    start_date="2021-8-29 00:00",
+    start_date="2021-8-29 00:00 +00",
 )
 
 t1 = SparkKubernetesOperator(
