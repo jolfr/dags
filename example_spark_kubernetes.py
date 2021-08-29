@@ -24,7 +24,7 @@ Spark-on-k8s operator is required to be already installed on Kubernetes
 https://github.com/GoogleCloudPlatform/spark-on-k8s-operator
 """
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 # [START import_module]
 # The DAG object; we'll need this to instantiate a DAG
@@ -48,12 +48,12 @@ dag = DAG(
         'email': ['airflow@example.com'],
         'email_on_failure': False,
         'email_on_retry': False,
-        'concurrency': "2",
+        'catchup': False,
         'max_active_runs': "1",
     },
     description='submit spark-pi as sparkApplication on kubernetes',
     schedule_interval='@hourly',
-    start_date="2021-8-29 00:00 +00",
+    start_date=datetime(2021, 8, 28),
 )
 
 t1 = SparkKubernetesOperator(
