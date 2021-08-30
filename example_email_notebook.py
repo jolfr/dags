@@ -14,8 +14,10 @@ from datetime import datetime, timedelta
 from airflow import DAG
 
 # Operators; we need this to operate!
-from airflow.operators import PapermillOperator, PythonOperator, EmailOperator, BashOperator
-
+from airflow.operators.bash import BashOperator
+from airflow.operators.email import EmailOperator
+from airflow.operators.python import PythonOperator
+from airflow.providers.papermill.operators.papermill import PapermillOperator
 # [END import_module]
 
 
