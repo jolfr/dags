@@ -8,6 +8,7 @@ with the output pdf attached.
 """
 
 from datetime import datetime, timedelta
+import os
 
 # [START import_module]
 # The DAG object; we'll need this to instantiate a DAG
@@ -43,7 +44,7 @@ with DAG(
 
     first_task = PapermillOperator(
         task_id='first_task',
-        input_nb="./example_notebook.ipynb",
+        input_nb="{}/example_notebook.ipynb".format(os.getcwd()),
         output_nb="/tmp/out-{{ execution_date }}.ipynb",
         parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"},
     )
