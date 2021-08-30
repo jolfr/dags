@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 
 # Operators; we need this to operate!
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash import DummyOperator
 from airflow.operators.email import EmailOperator
 from airflow.operators.python import PythonOperator
 from airflow.providers.papermill.operators.papermill import PapermillOperator
@@ -41,13 +41,16 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    bash_run_this = BashOperator(
-        task_id='run_this',
-        bash_command='echo 1',
+    first_task = DummyOperator(
+        task_id='first_task',
     )
 
-    bash_then_run_this = BashOperator(
-        task_id='run_this',
-        bash_command='echo 2',
+    second_task = DummyOperator(
+        task_id='second_task',
     )
-    bash_run_this >> bash_then_run_this
+
+    third_task = DummyOperator(
+        task_id='third_task',
+    )
+
+    first_task >> second_task >> third_task
