@@ -41,12 +41,13 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    run_this = BashOperator(
+    bash_run_this = BashOperator(
         task_id='run_this',
         bash_command='echo 1',
     )
 
-    then_run_this = BashOperator(
+    bash_then_run_this = BashOperator(
         task_id='run_this',
         bash_command='echo 2',
     )
+    bash_run_this >> bash_then_run_this
