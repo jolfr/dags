@@ -50,5 +50,3 @@ with DAG(
         task_id='run_this',
         bash_command='echo 2',
     )
-
-    run_this >> then_run_this
