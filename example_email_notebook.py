@@ -41,8 +41,11 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    first_task = DummyOperator(
+    first_task = PapermillOperator(
         task_id='first_task',
+        input_nb="./example_notebook.ipynb",
+        output_nb="/tmp/out-{{ execution_date }}.ipynb",
+        parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"},
     )
 
     second_task = DummyOperator(
