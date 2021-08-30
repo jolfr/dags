@@ -32,23 +32,23 @@ default_args={
     'tags': ['example', 'notebook'],
 }
 
-dag = DAG(
+with DAG(
     'email_notebook',
     default_args=default_args,
     description='example to execute and email notebook to stakeholders',
     schedule_interval='@daily',
     start_date=datetime(2021, 8, 28),
     catchup=False,
-)
+) as dag:
 
-run_this = BashOperator(
-    task_id='run_this',
-    bash_command='echo 1',
-)
+    run_this = BashOperator(
+        task_id='run_this',
+        bash_command='echo 1',
+    )
 
-then_run_this = BashOperator(
-    task_id='run_this',
-    bash_command='echo 2',
-)
+    then_run_this = BashOperator(
+        task_id='run_this',
+        bash_command='echo 2',
+    )
 
-run_this >> then_run_this
+    run_this >> then_run_this
