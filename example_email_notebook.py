@@ -57,7 +57,7 @@ with DAG(
         bash_command='jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/report-{{ ds_nodash }}.pdf',
     )
 
-    third_task = email = EmailOperator(
+    third_task = EmailOperator(
         task_id='send_email',
         to='jcarroll@mavrck.co',
         subject='Jupyter Notebook Test',
