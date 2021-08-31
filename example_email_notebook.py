@@ -54,7 +54,7 @@ with DAG(
 
     second_task = BashOperator(
         task_id='convert_notebook_to_pdf',
-        bash_command='jupyter --version',
+        bash_command='jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/report.pdf',
     )
 
     third_task = DummyOperator(
