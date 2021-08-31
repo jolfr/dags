@@ -33,6 +33,9 @@ default_args={
     'tags': ['example', 'notebook'],
 }
 
+def output_notebook(notebook_path):
+    print(notebook_path)
+
 with DAG(
     'email_notebook',
     default_args=default_args,
@@ -49,8 +52,10 @@ with DAG(
         parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"},
     )
 
-    second_task = DummyOperator(
-        task_id='second_task',
+    second_task = PythonOperator(
+        task_id='output_notebook_pdf',
+        python_callable=output_notebook,
+        op_kwargs={"notebook_path": "/tmp/out-{{ execution_date }}.ipynb"},
     )
 
     third_task = DummyOperator(
