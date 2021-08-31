@@ -15,7 +15,7 @@ import os
 from airflow import DAG
 
 # Operators; we need this to operate!
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.email import EmailOperator
 from airflow.operators.python import PythonOperator
 from airflow.providers.papermill.operators.papermill import PapermillOperator
@@ -52,10 +52,9 @@ with DAG(
         parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"},
     )
 
-    second_task = PythonOperator(
-        task_id='output_notebook_pdf',
-        python_callable=output_notebook,
-        op_kwargs={"notebook_path": "/tmp/out-{{ execution_date }}.ipynb"},
+    second_task = BashOperator(
+        task_id='convert_notebook_to_pdf',
+        bash_command='jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb',
     )
 
     third_task = DummyOperator(
