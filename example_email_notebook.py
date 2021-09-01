@@ -49,7 +49,7 @@ with DAG(
         task_id='run_notebook',
         input_nb="/tmp/example_notebook.ipynb",
         output_nb="/tmp/out-{{ execution_date }}.ipynb",
-        parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"},
+        parameters={"date": "{{ ds }}"},
     )
 
     second_task = BashOperator(

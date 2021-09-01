@@ -22,6 +22,7 @@ metadata:
   name: "spark-pi-{{ execution_date.timestamp() }}"
   namespace: hawkeye-workloads
 spec:
+  timeToLiveSeconds: 600
   type: Scala
   mode: cluster
   image: "gcr.io/spark-operator/spark:v2.4.4"
