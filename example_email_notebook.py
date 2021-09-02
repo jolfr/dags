@@ -55,7 +55,7 @@ with DAG(
     second_task = BashOperator(
         task_id='convert_notebook_to_pdf',
         bash_command="""
-        jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/report-{{ ds_nodash }}.pdf -TagRemovePreprocessor.remove_cell_tags='{"remove_cell", "injected_parameters"}' -TagRemovePreprocessor.remove_input_tags='{"remove_input"}'
+        jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/report-{{ ds_nodash }}.pdf -TagRemovePreprocessor.remove_cell_tags='{"remove_cell", "injected-parameters"}' -TagRemovePreprocessor.remove_input_tags='{"remove_input"}'
         """,
     )
 
