@@ -55,7 +55,7 @@ with DAG(
     second_task = BashOperator(
         task_id='convert_notebook_to_pdf',
         bash_command="""
-        jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/report-{{ ds_nodash }}.pdf -TagRemovePreprocessor.remove_cell_tags='{"remove_cell", "injected-parameters"}' -TagRemovePreprocessor.remove_input_tags='{"remove_input"}'
+        jupyter nbconvert --to pdf /tmp/out-{{ execution_date }}.ipynb --output /tmp/example-airflow-report.pdf -TagRemovePreprocessor.remove_cell_tags='{"remove_cell", "injected-parameters"}' -TagRemovePreprocessor.remove_input_tags='{"remove_input"}'
         """,
     )
 
@@ -64,7 +64,7 @@ with DAG(
         to='jcarroll@mavrck.co',
         subject='Jupyter Notebook Test',
         html_content=""" <h3>Email Test</h3> """,
-        files=["/tmp/report-{{ ds_nodash }}.pdf"]
+        files=["/tmp/example-airflow-report.pdf"]
     )
 
     first_task >> second_task >> third_task
